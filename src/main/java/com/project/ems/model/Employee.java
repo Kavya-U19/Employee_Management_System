@@ -74,6 +74,16 @@ public class Employee {
 	private HR HRId;
 	
 	
+	public Integer getEid() {
+		return eid;
+	}
+
+
+	public void setEid(Integer eid) {
+		this.eid = eid;
+	}
+
+
 	public String getFirstName() {
 		return firstName;
 	}

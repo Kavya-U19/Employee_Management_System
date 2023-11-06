@@ -58,4 +58,12 @@ public class Salary {
 	@Column(name = "Gratuity")
 	private Integer gratuity;
 
+	public Salary(String role, Integer basicPay, Integer pF, Integer gratuity) {
+		super();
+		this.role = role;
+		this.basicPay = basicPay;
+		PF = pF;
+		this.gratuity = gratuity;
+	}
+
 }

@@ -66,8 +66,20 @@ public class Leave {
 		return paidLeave;
 	}
 
+	public Leave() {
+		super();
+	}
+
 	public void setPaidLeave(Integer paidLeave) {
 		this.paidLeave = paidLeave;
+	}
+
+	public Leave(Integer employee_id, Integer leaveBalance, Integer paidLeave, Integer sickLeave) {
+		super();
+		Employee_id = employee_id;
+		this.leaveBalance = leaveBalance;
+		this.paidLeave = paidLeave;
+		this.sickLeave = sickLeave;
 	}
 
 	public Integer getSickLeave() {

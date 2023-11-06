@@ -40,19 +40,6 @@ public class EmployeeService {
 		return false;
 	}
 	
-	public Integer totalSalary(Integer eid) {
-		Integer salary;
-		Optional<Employee> e=empRepository.findById(eid);
-		if(e.isPresent()) {
-			Employee emp=e.get();
-			Salary role=emp.getRole();
-			Integer appraisal=emp.getAppraisal();
-			Integer basicPay=role.getBasicPay();
-			salary=(appraisal/100)*basicPay;
-			return salary;
-		}
-		return null;
-	}
 	
 	
 	
