@@ -37,6 +37,46 @@ public class Leave {
 	
 	@Column(name = "Sick_Leave")
 	private Integer sickLeave;
+
+	public String getLeaveType() {
+		return leaveType;
+	}
+
+	public void setLeaveType(String leaveType) {
+		this.leaveType = leaveType;
+	}
+
+	public String getLeaveStatus() {
+		return leaveStatus;
+	}
+
+	public void setLeaveStatus(String leaveStatus) {
+		this.leaveStatus = leaveStatus;
+	}
+
+	public Integer getLeaveBalance() {
+		return leaveBalance;
+	}
+
+	public void setLeaveBalance(Integer leaveBalance) {
+		this.leaveBalance = leaveBalance;
+	}
+
+	public Integer getPaidLeave() {
+		return paidLeave;
+	}
+
+	public void setPaidLeave(Integer paidLeave) {
+		this.paidLeave = paidLeave;
+	}
+
+	public Integer getSickLeave() {
+		return sickLeave;
+	}
+
+	public void setSickLeave(Integer sickLeave) {
+		this.sickLeave = sickLeave;
+	}
 	
 	
 	

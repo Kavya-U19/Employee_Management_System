@@ -23,6 +23,38 @@ public class Salary {
 	@Column(name = "PF")
 	private Integer PF;
 	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public Integer getBasicPay() {
+		return basicPay;
+	}
+
+	public void setBasicPay(Integer basicPay) {
+		this.basicPay = basicPay;
+	}
+
+	public Integer getPF() {
+		return PF;
+	}
+
+	public void setPF(Integer pF) {
+		PF = pF;
+	}
+
+	public Integer getGratuity() {
+		return gratuity;
+	}
+
+	public void setGratuity(Integer gratuity) {
+		this.gratuity = gratuity;
+	}
+
 	@Column(name = "Gratuity")
 	private Integer gratuity;
 
