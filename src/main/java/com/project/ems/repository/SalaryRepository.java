@@ -7,8 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import com.project.ems.model.Salary;
 
+import jakarta.transaction.Transactional;
+
 @Repository
+@Transactional
 public interface SalaryRepository extends JpaRepository<Salary, String>{
 	public abstract List<Salary> findByRole(String role);
+	public abstract void deleteByRole(String role);
 
 }

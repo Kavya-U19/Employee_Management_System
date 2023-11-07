@@ -73,7 +73,7 @@ public class Employee {
 	private Integer appraisal;
 	
 	@Column(name = "Salary")
-	private Double salary;
+	private Double totalSalary;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "HR_Id")
@@ -202,11 +202,11 @@ public class Employee {
 	}
 
 	public Double getSalary() {
-		return salary;
+		return totalSalary;
 	}
 
 	public void setSalary(Double salary) {
-		this.salary = salary;
+		this.totalSalary = salary;
 	}
 
 
@@ -235,7 +235,7 @@ public class Employee {
 		this.department = department;
 		this.role = role;
 		this.appraisal = appraisal;
-		this.salary = salary;
+		this.totalSalary = salary;
 		HRId = hRId;
 	}
 

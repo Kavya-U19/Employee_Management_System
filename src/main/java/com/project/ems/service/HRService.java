@@ -61,7 +61,7 @@ public class HRService {
 			Employee emp=e.get();
 			Salary role=emp.getRole();
 			Integer appraisal=emp.getAppraisal();
-			Integer basicPay=role.getBasicPay();
+			Double basicPay=role.getBasicPay();
 			salary=(double) ((appraisal/100)*basicPay);
 			return salary;
 		}
