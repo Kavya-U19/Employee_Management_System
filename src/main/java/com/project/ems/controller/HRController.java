@@ -30,7 +30,7 @@ public class HRController {
 	@Autowired
 	HRService hrService;
 	
-	@RequestMapping(path = "get-hr-exist/{eid}/{password}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "get-hr-exist/{eid}/{password}", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<List<Employee>> getEmpByName(@PathVariable(name = "eid") Integer eid,@PathVariable(name = "password") String password) {
 		boolean found = hrService.findHRExist(eid, password);
 		if(found) {

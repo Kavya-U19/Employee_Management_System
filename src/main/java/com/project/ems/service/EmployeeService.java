@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.ems.model.Employee;
+import com.project.ems.model.Leave;
 import com.project.ems.model.Salary;
 import com.project.ems.repository.EmployeeRepository;
+import com.project.ems.repository.LeaveRepository;
 import com.project.ems.repository.SalaryRepository;
 
 @Service
@@ -18,6 +20,9 @@ public class EmployeeService {
 	
 	@Autowired
 	SalaryRepository salaryRepo;
+	
+	@Autowired
+	LeaveRepository leaveRepo;
 	
 	public boolean findEmployeeExist(Integer eid,String password) {
 		Optional<Employee> e=empRepository.findById(eid);
@@ -39,6 +44,36 @@ public class EmployeeService {
 //		}
 //		return false;
 //	}
+	
+	public Integer getleavebalancebyempid(Integer eid) {
+		Optional<Leave> empLeave=leaveRepo.findById(eid);
+		if(empLeave.isPresent()) {
+			return empLeave.get().getLeaveBalance();
+			//return empLeave.get().getLeaveBalance();)
+		}
+		return null;
+	}
+	
+	public boolean employeeUpdatePassword(Integer eid,String password) {
+		Optional<Employee> e=empRepository.findById(eid);
+		if(e.isPresent()) {
+			Employee emp=e.get();
+			emp.setPassword(password);
+			return true;
+		}
+		return false;
+		 
+	}
+	
+	
+	
+	//addleave
+	//addattendance
+	//getleavebalancebyempid
+	//-----
+	//getattendancebypercenatagebyempid
+	//-----
+	//employeeupdatepassword
 	
 	
 	
