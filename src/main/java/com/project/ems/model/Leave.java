@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Leave {
 	
-	@Column(name = "Leave_Type")
+	@Column(name = "leave_type")
 	private String leaveType;
 	
     @Id

@@ -30,15 +30,15 @@ public class EmployeeService {
 		return false;
 	}
 	
-	public boolean setEmpAppraisal(Integer eid,Integer appraisal) {
-		Optional<Employee> e=empRepository.findById(eid);
-		if(e.isPresent()) {
-			Employee emp=e.get();
-			emp.setAppraisal(appraisal);
-			return true;
-		}
-		return false;
-	}
+//	public boolean setEmpAppraisal(Integer eid,Integer appraisal) {
+//		Optional<Employee> e=empRepository.findById(eid);
+//		if(e.isPresent()) {
+//			Employee emp=e.get();
+//			emp.setAppraisal(appraisal);
+//			return true;
+//		}
+//		return false;
+//	}
 	
 	
 	
