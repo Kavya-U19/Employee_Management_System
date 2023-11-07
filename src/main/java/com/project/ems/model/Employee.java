@@ -4,6 +4,9 @@ import java.util.Date;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,6 +41,7 @@ public class Employee {
 	private String lastName;
 	
 	@Column(name = "DOB")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private Date DOB;
 	
 	@Column(name="Password")
@@ -61,7 +65,7 @@ public class Employee {
 	@Column(name = "Department")
 	private String department;
 	
-	@OneToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Role")
 	private Salary role;
 	
@@ -71,7 +75,7 @@ public class Employee {
 	@Column(name = "Salary")
 	private Double salary;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "HR_Id")
 	private HR HRId;
 	
