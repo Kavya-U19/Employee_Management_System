@@ -152,8 +152,6 @@ public class EmployeeService {
 	        }
 	    }
 	    
-<<<<<<< Updated upstream
-=======
 		public Integer getleavebalancebyempid(Integer eid) {
 	        Optional<Leave> empLeave=leaveRepo.findById(eid);
 	        if(empLeave.isPresent()) {
@@ -173,7 +171,6 @@ public class EmployeeService {
 	        return false;
 	         
 	    }
->>>>>>> Stashed changes
 	    
 	    	    
 }

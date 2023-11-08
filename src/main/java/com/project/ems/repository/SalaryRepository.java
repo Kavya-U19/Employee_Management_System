@@ -10,10 +10,7 @@ import com.project.ems.model.Salary;
 @Repository
 public interface SalaryRepository extends JpaRepository<Salary, String>{
 	public abstract List<Salary> findByRole(String role);
-<<<<<<< Updated upstream
-=======
 
 	public abstract void deleteByRole(String role);
->>>>>>> Stashed changes
 
 }

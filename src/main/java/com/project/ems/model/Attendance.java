@@ -1,10 +1,6 @@
 package com.project.ems.model;
 
-<<<<<<< Updated upstream
-=======
-=======
 
->>>>>>> Stashed changes
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
