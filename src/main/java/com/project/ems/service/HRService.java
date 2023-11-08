@@ -46,7 +46,7 @@ public class HRService {
 	}
 	
 
-	public List<Employee> findAllEmp(){
+	public List<Employee> findAllEmp(){//getemp
 		List<Employee> emp=empRepo.findAll();
 		return emp;	
 	}
@@ -73,21 +73,61 @@ public class HRService {
 		return null;
 	}
 	
-	
+	//getempdetailsbyempid add this
 	public void addLeave(Integer eid) {
 		Leave leave=new Leave(eid,leaveBal,paidLeave,sickLeave);
 		leaveRepo.save(leave);
 	}
-	
+	//viewallleavereq
+	 public List<Leave> viewAllLeaveRequests() {
+	        List<Leave> leaveRequests = leaveRepo.findAll();
+	        return leaveRequests;
+	    }
+
 	public Employee updateEmployee(Employee e) {
 		return empRepo.save(e);
 	}
-	
+	//gethrdetails
+	//getempid
+	//getsalarydetailsbyempid
+	//
 	
 	public void deleteEmployee(Integer eid) {
 		empRepo.deleteById(eid);
 		leaveRepo.deleteById(eid);
 	}
+	//vibha	------------------------------------------------
+	public HR getHRDetails(Integer eid) {
+	    Optional<HR> h = hrRepo.findById(eid);
+	    if (h.isPresent()) {
+	        return h.get();
+	    } else {
+	        return null;
+	    }
+	}
+	
+	public Employee getEmployeeById(Integer empid) {
+	    Optional<Employee> emp = empRepo.findById(empid);
+	    if (emp.isPresent()) {
+	        return emp.get();
+	    } else {
+	        return null;
+	    }
+	}
+	
+	public Double getSalaryDetailsByEmpId(Integer empid) {
+	    Optional<Employee> employee = empRepo.findById(empid);
+	    if (employee.isPresent()) {
+	        return employee.get().getSalary();
+	    } else {
+	        return null;
+	    }
+	}
+
+	   public HR addHR(HR hr) {
+	        return hrRepo.save(hr);
+	    }
+	
 	
 	public boolean giveAppraisalToEmp(Integer eid,Integer appraisal) {
 		Optional<Employee> e=empRepo.findById(eid);
@@ -101,16 +141,16 @@ public class HRService {
 		return false;
 	}
 	
-	public boolean changeLeaveStatus(Integer eid,String leaveType,String status) {
+	public boolean changeLeaveStatus(Integer eid,String leaveType,int days, String status) {
 		Optional<Leave> e=leaveRepo.findById(eid);
 		if(e.isPresent()) {
 			Leave leave=e.get();
 			leave.setLeaveStatus(status);
 			if(status.equalsIgnoreCase("Accept")) {
 				if(leave.getLeaveType().equalsIgnoreCase("Paid Leave"))
-					leave.setPaidLeave(leave.getPaidLeave()-1);
+					leave.setPaidLeave(leave.getPaidLeave()-days);
 				else
-					leave.setSickLeave(leave.getSickLeave()-1);
+					leave.setSickLeave(leave.getSickLeave()-days);
 			}
 			return true;
 			
@@ -123,3 +163,5 @@ public class HRService {
 	
 
 }
+//viewallleaverequests//fetch all leave from leave repository total
+//addHR new hr 

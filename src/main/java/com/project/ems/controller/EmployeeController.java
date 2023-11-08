@@ -10,29 +10,61 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.project.ems.model.Attendance;
 import com.project.ems.model.Employee;
+import com.project.ems.model.Leave;
 import com.project.ems.service.EmployeeService;
 
 import jakarta.validation.Valid;
 
-@Controller
+@RestController
+@RequestMapping("employee")
+@CrossOrigin(origins = "*")
 public class EmployeeController {
 	
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	EmployeeService empService;
+	EmployeeService employeeService;
+
+	    @RequestMapping(path = "get-employee/{eid}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Employee> getEmployee(@PathVariable(name = "eid") Integer eid) {
+        Employee employee = employeeService.getEmployeeById(eid);
+        if (employee != null) {
+            HttpStatus status = HttpStatus.OK;
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("message", "Employee found successfully.");
+            ResponseEntity<Employee> response = new ResponseEntity<Employee>(employee, headers, status);
+            return response;
+        }
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("message", "Employee not found.");
+        ResponseEntity<Employee> response = new ResponseEntity<Employee>(headers, status);
+        return response;
+    }
+
+	    @RequestMapping(path = "update-employee", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody @Valid Employee employee) {
+    	employeeService.updateEmployee(employee);
+    	HttpStatus status = HttpStatus.OK;
+    	 HttpHeaders headers = new HttpHeaders();
+         headers.add("message", "Employee updated successfully.");
+         ResponseEntity<Employee> response = new ResponseEntity<Employee>(headers, status);
+         return response;
+    }
 	
 	@RequestMapping(path = "check-emp-exist/{eid}/{password}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<List<Employee>> getEmpByName(@PathVariable(name = "eid") Integer eid,@PathVariable(name = "password") String password) {
-		boolean found = empService.findEmployeeExist(eid, password);
+		boolean found = employeeService.findEmployeeExist(eid, password);
 		if(found) {
 			HttpStatus status = HttpStatus.OK;
 			HttpHeaders headers = new HttpHeaders();
@@ -49,17 +81,28 @@ public class EmployeeController {
 	
 	@RequestMapping(path = "get-all-leaves/{eid}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Integer> getAllEmps(@PathVariable(name = "eid") Integer eid) {
-		Integer leave = empService.getleavebalancebyempid(eid);
+		Integer leave = employeeService.getleavebalancebyempid(eid);
 		HttpStatus status = HttpStatus.OK;
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("message", "Leaves found successfully");
 		ResponseEntity<Integer> response = new ResponseEntity<>(leave,headers,status);
 		return response;
 	}
+
+	  @RequestMapping(path = "apply-leave/{eid}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+  public ResponseEntity<Leave> addLeave(@PathVariable Integer eid, @RequestBody Leave leave) {
+      Leave createdLeave = employeeService.applyLeave(eid, leave.getLeaveType(),leave.getNumDays(),leave.getLeaveDate());
+      HttpStatus status = HttpStatus.OK;
+      HttpHeaders headers = new HttpHeaders();
+      headers.add("message", "Leave request created successfully. Status: pending");
+      ResponseEntity<Leave> response = new ResponseEntity<>(createdLeave, headers, status);
+      LOG.info("Leave request created for employee with eid " + eid + ": " + createdLeave.toString());
+      return response;
+  }
 	
 	@RequestMapping(path = "update-password-by-empId/{eid}/{password}", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Boolean> updatePassword(@PathVariable(name = "eid") Integer eid,@PathVariable(name = "password") String password) {
-		boolean updated = empService.employeeUpdatePassword(eid, password);
+		boolean updated = employeeService.employeeUpdatePassword(eid, password);
 		if(updated) {
 			HttpStatus status = HttpStatus.OK;
 			HttpHeaders headers = new HttpHeaders();
@@ -76,7 +119,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path = "add-attendance/{eid}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Attendance> addAttendance(@RequestBody @Valid Integer eid, Date loginTime, Date logoutTime, Date date) {
-		Attendance attObj = empService.addAttendance(eid, loginTime, logoutTime, date);
+		Attendance attObj = employeeService.addAttendance(eid, loginTime, logoutTime, date);
 		HttpStatus status = HttpStatus.CREATED;
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("message", "Attendance added successfully.");
@@ -87,7 +130,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path = "get-percentage-attendance/{eid}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Attendance> getAttendancePercentageByEId(@PathVariable(name = "eid") Integer eid) {
-		Object attObj = empService.getAttendancePercentageByEId(eid);
+		Object attObj = employeeService.getAttendancePercentageByEId(eid);
 		HttpStatus status = HttpStatus.CREATED;
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("message", "Attendance percentage retreived successfully.");

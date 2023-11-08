@@ -1,6 +1,9 @@
 package com.project.ems.model;
 
 
+import java.util.Date;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -19,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Leave {
 	
-	@Column(name = "leave_type")
+	@Column(name = "Leave_Type")
 	private String leaveType;
 	
     @Id
@@ -37,10 +40,47 @@ public class Leave {
 	
 	@Column(name = "Sick_Leave")
 	private Integer sickLeave;
+	
+	@Column(name = "leave_date")
+	private List<Date> leaveDate;//do this getter setter
+	
+	@Column(name = "num_days")
+	private Integer numDays;
 
 	public String getLeaveType() {
 		return leaveType;
 	}
+	
+
+	public Integer getEmployee_id() {
+		return Employee_id;
+	}
+
+
+	public void setEmployee_id(Integer employee_id) {
+		Employee_id = employee_id;
+	}
+
+
+	public List<Date> getLeaveDate() {
+		return leaveDate;
+	}
+
+
+	public void setLeaveDate(List<Date> leaveDate) {
+		this.leaveDate = leaveDate;
+	}
+
+
+	public Integer getNumDays() {
+		return numDays;
+	}
+
+
+	public void setNumDays(Integer numDays) {
+		this.numDays = numDays;
+	}
+
 
 	public void setLeaveType(String leaveType) {
 		this.leaveType = leaveType;
@@ -89,8 +129,7 @@ public class Leave {
 	public void setSickLeave(Integer sickLeave) {
 		this.sickLeave = sickLeave;
 	}
-	
-	
-	
+
 
 }
+//noofdaysleave

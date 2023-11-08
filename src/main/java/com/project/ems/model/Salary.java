@@ -18,13 +18,10 @@ public class Salary {
 	private String role;
 
 	@Column(name = "Basic_Pay")
-	private Double basicPay;
+	private Integer basicPay;
 	
 	@Column(name = "PF")
-	private Double PF;
-	
-	@Column(name = "Gratuity")
-	private Double gratuity;
+	private Integer PF;
 	
 	public String getRole() {
 		return role;
@@ -34,44 +31,39 @@ public class Salary {
 		this.role = role;
 	}
 
-	public Double getBasicPay() {
+	public Integer getBasicPay() {
 		return basicPay;
 	}
 
-	public void setBasicPay(Double basicPay) {
+	public void setBasicPay(Integer basicPay) {
 		this.basicPay = basicPay;
 	}
 
-	public Double getPF() {
+	public Integer getPF() {
 		return PF;
 	}
 
-	public void setPF(Double pF) {
+	public void setPF(Integer pF) {
 		PF = pF;
 	}
 
-	public Double getGratuity() {
+	public Integer getGratuity() {
 		return gratuity;
 	}
 
-	public void setGratuity(Double gratuity) {
+	public void setGratuity(Integer gratuity) {
 		this.gratuity = gratuity;
 	}
 
-	
+	@Column(name = "Gratuity")
+	private Integer gratuity;
 
-	public Salary(String role, Double basicPay, Double pF, Double gratuity) {
+	public Salary(String role, Integer basicPay, Integer pF, Integer gratuity) {
 		super();
 		this.role = role;
 		this.basicPay = basicPay;
 		PF = pF;
 		this.gratuity = gratuity;
 	}
-
-	public Salary() {
-		super();
-	}
-	
-	
 
 }

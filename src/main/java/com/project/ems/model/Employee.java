@@ -4,9 +4,6 @@ import java.util.Date;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,8 +24,7 @@ public class Employee {
 	
 	@Id 
 	@Column(name = "Employee_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name="Id_Generator",initialValue=101)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer eid;
 
 	@Column(name = "First_Name")
@@ -41,7 +36,6 @@ public class Employee {
 	private String lastName;
 	
 	@Column(name = "DOB")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private Date DOB;
 	
 	@Column(name="Password")
@@ -65,6 +59,7 @@ public class Employee {
 	@Column(name = "Department")
 	private String department;
 	
+
 	@ManyToOne
 	@JoinColumn(name = "role")
 	private Salary role;
@@ -73,11 +68,13 @@ public class Employee {
 	private Integer appraisal;
 	
 	@Column(name = "Salary")
-	private Double totalSalary;
+	private Double salary;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "HR_Id")
 	private HR HRId;
+	
+
 	
 	
 	public Integer getEid() {
@@ -202,11 +199,11 @@ public class Employee {
 	}
 
 	public Double getSalary() {
-		return totalSalary;
+		return salary;
 	}
 
 	public void setSalary(Double salary) {
-		this.totalSalary = salary;
+		this.salary = salary;
 	}
 
 
@@ -235,9 +232,12 @@ public class Employee {
 		this.department = department;
 		this.role = role;
 		this.appraisal = appraisal;
-		this.totalSalary = salary;
+		this.salary = salary;
 		HRId = hRId;
 	}
+	
 
+	
+	
 
 }
