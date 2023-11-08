@@ -152,6 +152,28 @@ public class EmployeeService {
 	        }
 	    }
 	    
+<<<<<<< Updated upstream
+=======
+		public Integer getleavebalancebyempid(Integer eid) {
+	        Optional<Leave> empLeave=leaveRepo.findById(eid);
+	        if(empLeave.isPresent()) {
+	            return empLeave.get().getLeaveBalance();
+	            //return empLeave.get().getLeaveBalance();)
+	        }
+	        return null;
+	    }
+	   
+	    public boolean employeeUpdatePassword(Integer eid,String password) {
+	        Optional<Employee> e=empRepository.findById(eid);
+	        if(e.isPresent()) {
+	            Employee emp=e.get();
+	            emp.setPassword(password);
+	            return true;
+	        }
+	        return false;
+	         
+	    }
+>>>>>>> Stashed changes
 	    
 	    	    
 }

@@ -21,7 +21,11 @@ public class Salary {
 	private Integer basicPay;
 	
 	@Column(name = "PF")
+<<<<<<< Updated upstream
 	private Integer PF;
+=======
+	private double PF;
+>>>>>>> Stashed changes
 	
 	public String getRole() {
 		return role;
@@ -39,6 +43,7 @@ public class Salary {
 		this.basicPay = basicPay;
 	}
 
+<<<<<<< Updated upstream
 	public Integer getPF() {
 		return PF;
 	}
@@ -59,6 +64,28 @@ public class Salary {
 	private Integer gratuity;
 
 	public Salary(String role, Integer basicPay, Integer pF, Integer gratuity) {
+=======
+	public double getPF() {
+		return PF;
+	}
+
+	public void setPF(double d) {
+		PF = d;
+	}
+
+	public double getGratuity() {
+		return gratuity;
+	}
+
+	public void setGratuity(double d) {
+		this.gratuity = d;
+	}
+
+	@Column(name = "Gratuity")
+	private double gratuity;
+
+	public Salary(String role, Double basicPay, Integer pF, Integer gratuity) {
+>>>>>>> Stashed changes
 		super();
 		this.role = role;
 		this.basicPay = basicPay;
