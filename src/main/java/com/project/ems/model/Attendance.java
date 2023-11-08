@@ -2,6 +2,8 @@ package com.project.ems.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -20,12 +22,15 @@ public class Attendance {
 	 private Integer Employee_id;
 	
 	@Column(name = "Login_Time")
-	private Integer loginTime;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm:ss.SSSZ")
+	private Date loginTime;
 	
 	@Column(name = "Logout_Time")
-	private Integer logoutTime;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm:ss.SSSZ")	
+	private Date logoutTime;
 	
 	@Column(name="Date")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private Date date;
 	
 	@Column(name = "No. of days attended")
@@ -45,19 +50,19 @@ public class Attendance {
 		Employee_id = employee_id;
 	}
 
-	public Integer getLoginTime() {
+	public Date getLoginTime() {
 		return loginTime;
 	}
 
-	public void setLoginTime(Integer loginTime) {
+	public void setLoginTime(Date loginTime) {
 		this.loginTime = loginTime;
 	}
 
-	public Integer getLogoutTime() {
+	public Date getLogoutTime() {
 		return logoutTime;
 	}
 
-	public void setLogoutTime(Integer logoutTime) {
+	public void setLogoutTime(Date logoutTime) {
 		this.logoutTime = logoutTime;
 	}
 

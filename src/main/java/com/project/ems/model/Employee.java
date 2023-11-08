@@ -65,8 +65,8 @@ public class Employee {
 	@Column(name = "Department")
 	private String department;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "Role")
+	@ManyToOne
+	@JoinColumn(name = "role")
 	private Salary role;
 	
 	@Column(name = "Appraisal")
