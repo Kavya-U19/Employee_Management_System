@@ -59,8 +59,9 @@ public class Employee {
 	@Column(name = "Department")
 	private String department;
 	
-	@OneToOne
-	@JoinColumn(name = "Role")
+
+	@ManyToOne
+	@JoinColumn(name = "role")
 	private Salary role;
 	
 	@Column(name = "Appraisal")

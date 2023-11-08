@@ -13,6 +13,7 @@ import com.project.ems.model.Salary;
 import com.project.ems.repository.EmployeeRepository;
 import com.project.ems.repository.HRRepository;
 import com.project.ems.repository.LeaveRepository;
+import com.project.ems.repository.SalaryRepository;
 
 @Service
 public class HRService {
@@ -25,6 +26,9 @@ public class HRService {
 	
 	@Autowired
 	LeaveRepository leaveRepo;
+	
+	@Autowired
+	SalaryRepository salaryRepo;
 	
 	Integer paidLeave=20;
 	Integer sickLeave=12;
@@ -61,8 +65,9 @@ public class HRService {
 			Employee emp=e.get();
 			Salary role=emp.getRole();
 			Integer appraisal=emp.getAppraisal();
-			Integer basicPay=role.getBasicPay();
-			salary=(double) ((appraisal/100)*basicPay);
+			List<Salary> salaryComp=salaryRepo.findByRole(role.getRole());
+			Double basicPay = salaryComp.get(0).getBasicPay();
+			salary=(double) (basicPay + ((double)((double)(appraisal/100))*basicPay));
 			return salary;
 		}
 		return null;
