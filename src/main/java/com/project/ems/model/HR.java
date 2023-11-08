@@ -19,6 +19,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HR {
 	
+	public HR() {
+		super();
+	}
+	
 	@Id 
 	@Column(name = "HR_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

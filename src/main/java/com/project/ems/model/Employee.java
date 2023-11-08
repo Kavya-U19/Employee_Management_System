@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,9 +23,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Employee {
 	
+	public Employee() {
+		super();
+	}
+	
 	@Id 
 	@Column(name = "Employee_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name="Id_Generator",initialValue=101)
 	private Integer eid;
 
 	@Column(name = "First_Name")
@@ -73,10 +79,7 @@ public class Employee {
 	@ManyToOne
 	@JoinColumn(name = "HR_Id")
 	private HR HRId;
-	
-
-	
-	
+		
 	public Integer getEid() {
 		return eid;
 	}

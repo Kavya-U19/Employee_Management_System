@@ -50,7 +50,7 @@ public class SalaryController {
 	}
 	
 	@RequestMapping(path = "add-salary", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Salary> addEmp(@RequestBody @Valid Salary salary) {
+	public ResponseEntity<Salary> addSalary(@RequestBody @Valid Salary salary) {
 		Salary salaryObj = salaryService.addSalary(salary);
 		HttpStatus status = HttpStatus.CREATED;
 		HttpHeaders headers = new HttpHeaders();
@@ -61,7 +61,7 @@ public class SalaryController {
 	}
 	
 	@RequestMapping(path = "delete-salary/{role}", method = RequestMethod.DELETE, produces = "application/json")
-	public ResponseEntity<Salary> deleteEmp(@PathVariable(name = "role") String role) {
+	public ResponseEntity<Salary> deleteSalary(@PathVariable(name = "role") String role) {
 		salaryService.deleteSalary(role);
 		HttpStatus status = HttpStatus.OK;
 		HttpHeaders headers = new HttpHeaders();
@@ -71,7 +71,7 @@ public class SalaryController {
 	}
 	
 	@RequestMapping(path = "update-salary", method = RequestMethod.PUT, produces = "application/json")
-	public ResponseEntity<Boolean> updatePassword(@RequestBody Salary salary) {
+	public ResponseEntity<Boolean> updateSalary(@RequestBody Salary salary) {
 		boolean updated = salaryService.updateSalary(salary);
 		if(updated) {
 			HttpStatus status = HttpStatus.OK;

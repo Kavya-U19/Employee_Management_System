@@ -40,13 +40,13 @@ public class HRController {
 		if(found) {
 			HttpStatus status = HttpStatus.OK;
 			HttpHeaders headers = new HttpHeaders();
-			headers.add("message", "Employees found successfully.");
+			headers.add("message", "HR found successfully.");
 			ResponseEntity<List<Employee>> response = new ResponseEntity<List<Employee>>(headers, status);
 			return response;
 		}
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("message", "HR not found successfully.");
+		headers.add("message", "HR not found.");
 		ResponseEntity<List<Employee>> response = new ResponseEntity<List<Employee>>(headers, status);
 		return response;
 	}

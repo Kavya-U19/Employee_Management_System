@@ -11,7 +11,12 @@ import lombok.NoArgsConstructor;
 @Table(name = "Salary_Table")
 @Data
 @NoArgsConstructor
+
 public class Salary {
+	
+	public Salary() {
+		super();
+	}
 	
 	@Id 
 	@Column(name = "Role")
