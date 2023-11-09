@@ -16,6 +16,8 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.CascadeType;
 
 @Entity
 @Table(name = "Employee_Table")
@@ -29,19 +31,18 @@ public class Employee {
 	
 	@Id 
 	@Column(name = "Employee_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name="Id_Generator",initialValue=101)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @SequenceGenerator(name="Id_Generator",initialValue=101)
 	private Integer eid;
 
 	@Column(name = "First_Name")
-	@Length(min = 4, max = 20, message = "Length should be 4 to 20 characters!")
 	private String firstName;
 	
 	@Column(name = "Last_Name")
-	@Length(min = 4, max = 20, message = "Length should be 4 to 20 characters!")
 	private String lastName;
 	
 	@Column(name = "DOB")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private Date DOB;
 	
 	@Column(name="Password")
@@ -65,21 +66,20 @@ public class Employee {
 	@Column(name = "Department")
 	private String department;
 	
-
 	@ManyToOne
 	@JoinColumn(name = "role")
 	private Salary role;
 	
 	@Column(name = "Appraisal")
-	private Integer appraisal;
+	private Double appraisal;
 	
 	@Column(name = "Salary")
 	private Double salary;
 	
-	@ManyToOne
-	@JoinColumn(name = "HR_Id")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "HRId")
 	private HR HRId;
-		
+	
 	public Integer getEid() {
 		return eid;
 	}
@@ -193,11 +193,11 @@ public class Employee {
 		this.role = role;
 	}
 
-	public Integer getAppraisal() {
+	public Double getAppraisal() {
 		return appraisal;
 	}
 
-	public void setAppraisal(Integer appraisal) {
+	public void setAppraisal(Double appraisal) {
 		this.appraisal = appraisal;
 	}
 
@@ -221,7 +221,7 @@ public class Employee {
 	public Employee(@Length(min = 4, max = 20, message = "Length should be 4 to 20 characters!") String firstName,
 			@Length(min = 4, max = 20, message = "Length should be 4 to 20 characters!") String lastName, Date dOB,
 			String password, String email, String sex, String organization, String address, Date dateOfJoining,
-			String department, Salary role, Integer appraisal, Double salary, HR hRId) {
+			String department, Salary role, Double appraisal, Double salary, HR hRId) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;

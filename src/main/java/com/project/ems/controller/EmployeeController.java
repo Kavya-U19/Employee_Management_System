@@ -35,13 +35,14 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;
 
-	    @RequestMapping(path = "get-employee/{eid}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "get-employee/{eid}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Employee> getEmployee(@PathVariable(name = "eid") Integer eid) {
         Employee employee = employeeService.getEmployeeById(eid);
         if (employee != null) {
             HttpStatus status = HttpStatus.OK;
             HttpHeaders headers = new HttpHeaders();
             headers.add("message", "Employee found successfully.");
+            LOG.info("Employee not found");
             ResponseEntity<Employee> response = new ResponseEntity<Employee>(employee, headers, status);
             return response;
         }
@@ -49,6 +50,7 @@ public class EmployeeController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("message", "Employee not found.");
         ResponseEntity<Employee> response = new ResponseEntity<Employee>(headers, status);
+        LOG.info("Employee not found");
         return response;
     }
 
@@ -79,25 +81,44 @@ public class EmployeeController {
 		return response;
 	}
 	
+//	@RequestMapping(path = "get-all-leaves/{eid}", method = RequestMethod.GET, produces = "application/json")
+//	public ResponseEntity<Integer> getAllEmps(@PathVariable(name = "eid") Integer eid) {
+//		Integer leave = employeeService.getleavebalancebyempid(eid);
+//		HttpStatus status = HttpStatus.OK;
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.add("message", "Leaves found successfully");
+//		ResponseEntity<Integer> response = new ResponseEntity<>(leave,headers,status);
+//		return response;
+//	}
+	
 	@RequestMapping(path = "get-all-leaves/{eid}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Integer> getAllEmps(@PathVariable(name = "eid") Integer eid) {
-		Integer leave = employeeService.getleavebalancebyempid(eid);
+	public ResponseEntity<Leave> getAllEmps(@PathVariable(name = "eid") Integer eid) {
+		Leave leave = employeeService.getleavebalancebyempid(eid);
 		HttpStatus status = HttpStatus.OK;
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("message", "Leaves found successfully");
-		ResponseEntity<Integer> response = new ResponseEntity<>(leave,headers,status);
+		ResponseEntity<Leave> response = new ResponseEntity<>(leave,headers,status);
 		return response;
 	}
 
-	  @RequestMapping(path = "apply-leave/{eid}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-  public ResponseEntity<Leave> addLeave(@PathVariable Integer eid, @RequestBody Leave leave) {
+	@RequestMapping(path = "apply-leave/{eid}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public ResponseEntity<Leave> addLeave(@PathVariable Integer eid, @RequestBody Leave leave) {
       Leave createdLeave = employeeService.applyLeave(eid, leave.getLeaveType(),leave.getNumDays(),leave.getLeaveDate());
-      HttpStatus status = HttpStatus.OK;
-      HttpHeaders headers = new HttpHeaders();
-      headers.add("message", "Leave request created successfully. Status: pending");
-      ResponseEntity<Leave> response = new ResponseEntity<>(createdLeave, headers, status);
-      LOG.info("Leave request created for employee with eid " + eid + ": " + createdLeave.toString());
-      return response;
+      if(createdLeave!=null) {
+    	  HttpStatus status = HttpStatus.OK;
+          HttpHeaders headers = new HttpHeaders();
+          headers.add("message", "Leave request created successfully. Status: pending");
+          ResponseEntity<Leave> response = new ResponseEntity<>(createdLeave, headers, status);
+          LOG.info("Leave request created for employee with eid " + eid + ": " + createdLeave.toString());
+          return response;
+      }else {
+    	HttpStatus status = HttpStatus.NOT_FOUND;
+  		HttpHeaders headers = new HttpHeaders();
+  		headers.add("message", "Employee not found");
+  		ResponseEntity<Leave> response = new ResponseEntity<>(createdLeave,headers, status);
+  		return response;
+      }
+     
   }
 	
 	@RequestMapping(path = "update-password-by-empId/{eid}/{password}", method = RequestMethod.POST, produces = "application/json")
@@ -110,33 +131,56 @@ public class EmployeeController {
 			ResponseEntity<Boolean> response = new ResponseEntity<>(updated,headers, status);
 			return response;
 		}
-		HttpStatus status = HttpStatus.NOT_FOUND;
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("message", "Employee not found successfully.");
-		ResponseEntity<Boolean> response = new ResponseEntity<>(updated,headers, status);
-		return response;
+		else {
+			HttpStatus status = HttpStatus.NOT_FOUND;
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("message", "Employee not found");
+			ResponseEntity<Boolean> response = new ResponseEntity<>(updated,headers, status);
+			return response;
+		}
+		
 	}
 	
 	@RequestMapping(path = "add-attendance/{eid}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Attendance> addAttendance(@RequestBody @Valid Integer eid, Date loginTime, Date logoutTime, Date date) {
-		Attendance attObj = employeeService.addAttendance(eid, loginTime, logoutTime, date);
-		HttpStatus status = HttpStatus.CREATED;
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("message", "Attendance added successfully.");
-		ResponseEntity<Attendance> response = new ResponseEntity<Attendance>(attObj, headers, status);
-		LOG.info(attObj.toString());
-		return response;
+	public ResponseEntity<Attendance> addAttendance(@PathVariable(name = "eid") Integer eid, @RequestBody Attendance attendance) {
+		Attendance attObj = employeeService.addAttendance(eid, attendance.getLoginTime(), attendance.getLogoutTime(), attendance.getDate());
+		if(attObj!=null) {
+			HttpStatus status = HttpStatus.OK;
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("message", "Attendance added successfully.");
+			ResponseEntity<Attendance> response = new ResponseEntity<Attendance>(attObj, headers, status);
+			LOG.info(attObj.toString());
+			return response;
+		}
+		else {
+			HttpStatus status = HttpStatus.NOT_FOUND;
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("message", "Employee not found");
+			ResponseEntity<Attendance> response = new ResponseEntity<>(attObj,headers, status);
+			return response;
+		}
+		
 	}
 	
 	@RequestMapping(path = "get-percentage-attendance/{eid}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Attendance> getAttendancePercentageByEId(@PathVariable(name = "eid") Integer eid) {
-		Object attObj = employeeService.getAttendancePercentageByEId(eid);
-		HttpStatus status = HttpStatus.CREATED;
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("message", "Attendance percentage retreived successfully.");
-		ResponseEntity<Attendance> response = new ResponseEntity<Attendance>((Attendance) attObj, headers, status);
-		LOG.info(attObj.toString());
-		return response;
+	public ResponseEntity<Double> getAttendancePercentageByEId(@PathVariable(name = "eid") Integer eid) {
+		Double attObj = employeeService.getAttendancePercentageByEId(eid);
+		if(attObj!=null) {
+			HttpStatus status = HttpStatus.OK;
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("message", "Attendance percentage retreived successfully.");
+			ResponseEntity<Double> response = new ResponseEntity<Double>(attObj, headers, status);
+			LOG.info(attObj.toString());
+			return response;
+		}
+		else {
+			HttpStatus status = HttpStatus.NOT_FOUND;
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("message", "Employee not found");
+			ResponseEntity<Double> response = new ResponseEntity<>(null,headers, status);
+			return response;
+		}
+		
 	}
 	
 }

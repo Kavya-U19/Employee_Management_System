@@ -1,7 +1,5 @@
 package com.project.ems.service;
 
-
-
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +30,6 @@ public class EmployeeService {
 	@Autowired
 	LeaveRepository leaveRepo;
 	
-
 	@Autowired
 	AttendanceRepository attendanceRepo;
 	
@@ -47,17 +44,17 @@ public class EmployeeService {
 		return false;
 	}
 	
-	public boolean setEmpAppraisal(Integer eid,Integer appraisal) {
-		Optional<Employee> e=empRepository.findById(eid);
-		if(e.isPresent()) {
-			Employee emp=e.get();
-			emp.setAppraisal(appraisal);
-			return true;
-		}
-		return false;
-	}
+//	public boolean setEmpAppraisal(Integer eid,Double appraisal) {
+//		Optional<Employee> e=empRepository.findById(eid);
+//		if(e.isPresent()) {
+//			Employee emp=e.get();
+//			emp.setAppraisal(appraisal);
+//			return true;
+//		}
+//		return false;
+//	}
 	
-	public Attendance addAttendance(Integer eid, Date loginTime, Date logoutTime, Date date) {
+	public Attendance addAttendance(Integer eid, String loginTime, String logoutTime, String date) {
 		Optional<Attendance> a = attendanceRepo.findById(eid);
 		if(a.isPresent()) {
 			Attendance empAtt = a.get();
@@ -65,14 +62,14 @@ public class EmployeeService {
 			empAtt.setLogoutTime(logoutTime);
 			empAtt.setDate(date);
 			empAtt.setDays(empAtt.getDays() + 1);
-			attendanceRepo.save(empAtt);
+			return attendanceRepo.save(empAtt);
 		}
 		return null;
 		// throw exception
 		
 	}
 	
-	public Object getAttendancePercentageByEId(Integer eid) {
+	public Double getAttendancePercentageByEId(Integer eid) {
 		Optional<Attendance> a = attendanceRepo.findById(eid);
 		if(a.isPresent()) {
 			Attendance empAtt = a.get();
@@ -83,12 +80,6 @@ public class EmployeeService {
 	}
 	
 	
-	 public void deleteEmployee(Integer eid) {
-	        empRepository.deleteById(eid);
-	    }
-	 
-	 
-
 	 public boolean updateEmployee(Employee updatedEmployee) {
 	        Optional<Employee> existingEmployee = empRepository.findById(updatedEmployee.getEid());
 	        if (existingEmployee.isPresent()) {
@@ -103,10 +94,10 @@ public class EmployeeService {
 	    }
 	 
 
-	    public boolean isEmployeeExist(Integer eid) {
-	        return empRepository.existsById(eid);
-	    }  
-	    
+//	    public boolean isEmployeeExist(Integer eid) {
+//	        return empRepository.existsById(eid);
+//	    }  
+//	    
 	    
 	    
 	    
@@ -120,7 +111,7 @@ public class EmployeeService {
 	           empLeave.setNumDays(numDays);
 	           empLeave.setLeaveDate(leaveDate);
 	           empLeave.setLeaveStatus("Pending");
-	            return leaveRepo.save(empLeave);
+	           return leaveRepo.save(empLeave);
 	        }
 
 	        return null;
@@ -130,18 +121,17 @@ public class EmployeeService {
 	    
 	    
 	    
-	    public List<Employee> getAllEmployees() {
-	        return empRepository.findAll();
-	    }
-
-		public Employee addEmployee(@Valid Employee employee) {
-			// TODO Auto-generated method stub
-			 return empRepository.save(employee);
-		}
+//	    public List<Employee> getAllEmployees() {
+//	        return empRepository.findAll();
+//	    }
+//
+//		public Employee addEmployee(@Valid Employee employee) {
+//			// TODO Auto-generated method stub
+//			 return empRepository.save(employee);
+//		}
 
 
 		public Employee getEmployeeById(Integer eid) {
-			// TODO Auto-generated method stub
 	        Optional<Employee> employee = empRepository.findById(eid);
 	        
 	        if (employee.isPresent()) {
@@ -152,13 +142,35 @@ public class EmployeeService {
 	        }
 	    }
 	    
-		public Integer getleavebalancebyempid(Integer eid) {
-	        Optional<Leave> empLeave=leaveRepo.findById(eid);
-	        if(empLeave.isPresent()) {
-	            return empLeave.get().getLeaveBalance();
-	            //return empLeave.get().getLeaveBalance();)
+//		public Integer getleavebalancebyempid(Integer eid) {
+//	        Optional<Leave> empLeave=leaveRepo.findById(eid);
+//	        if(empLeave.isPresent()) {
+//	            return empLeave.get().getLeaveBalance();
+//	            //return empLeave.get().getLeaveBalance();)
+//	        }
+//	        return null;
+//	    }
+		
+//		public Integer[] getleavebalancebyempid(Integer eid) {
+//	        Optional<Leave> empLeave=leaveRepo.findById(eid);
+//	        if(empLeave.isPresent()) {
+//	        	Integer[] empLeaveList = {empLeave.get().getPaidLeave(), empLeave.get().getSickLeave(), empLeave.get().getLeaveBalance()};	        	
+//	            return empLeaveList;
+//	            //return empLeave.get().getLeaveBalance();)
+//	        }
+//	        return null;
+//	    }
+//	   ;
+	   
+		public Leave getleavebalancebyempid(Integer eid) {
+	        Optional<Leave> leaves = leaveRepo.findById(eid);
+	        
+	        if (leaves.isPresent()) {
+	            return leaves.get();
+	        } else {
+	            
+	            return null;
 	        }
-	        return null;
 	    }
 	   
 	    public boolean employeeUpdatePassword(Integer eid,String password) {
@@ -171,6 +183,8 @@ public class EmployeeService {
 	        return false;
 	         
 	    }
+	    
+	   
 	    
 	    	    
 }

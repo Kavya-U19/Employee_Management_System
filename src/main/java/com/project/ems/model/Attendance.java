@@ -22,21 +22,24 @@ public class Attendance {
 	 private Integer Employee_id;
 	
 	@Column(name = "Login_Time")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm:ss.SSSZ")
-	private Date loginTime;
+	private String loginTime;
 	
 	@Column(name = "Logout_Time")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm:ss.SSSZ")	
-	private Date logoutTime;
+	private String logoutTime;
 	
 	@Column(name="Date")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-	private Date date;
+	private String date;
 	
 	@Column(name = "No. of days attended")
 	private Integer days;
 	
 	
+
+	public Attendance(Integer employee_id, Integer days) {
+		super();
+		Employee_id = employee_id;
+		this.days = days;
+	}
 
 	public Attendance() {
 		super();
@@ -50,27 +53,27 @@ public class Attendance {
 		Employee_id = employee_id;
 	}
 
-	public Date getLoginTime() {
+	public String getLoginTime() {
 		return loginTime;
 	}
 
-	public void setLoginTime(Date loginTime) {
+	public void setLoginTime(String loginTime) {
 		this.loginTime = loginTime;
 	}
 
-	public Date getLogoutTime() {
+	public String getLogoutTime() {
 		return logoutTime;
 	}
 
-	public void setLogoutTime(Date logoutTime) {
+	public void setLogoutTime(String logoutTime) {
 		this.logoutTime = logoutTime;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
