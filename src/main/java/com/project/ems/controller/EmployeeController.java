@@ -2,6 +2,7 @@ package com.project.ems.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -162,14 +163,36 @@ public class EmployeeController {
 		
 	}
 	
+//	@RequestMapping(path = "get-percentage-attendance/{eid}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+//	public ResponseEntity<Double> getAttendancePercentageByEId(@PathVariable(name = "eid") Integer eid) {
+//		Double attObj = employeeService.getAttendancePercentageByEId(eid);
+//		if(attObj!=null) {
+//			HttpStatus status = HttpStatus.OK;
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.add("message", "Attendance percentage retreived successfully.");
+//			ResponseEntity<Double> response = new ResponseEntity<Double>(attObj, headers, status);
+//			LOG.info(attObj.toString());
+//			return response;
+//		}
+//		else {
+//			HttpStatus status = HttpStatus.NOT_FOUND;
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.add("message", "Employee not found");
+//			ResponseEntity<Double> response = new ResponseEntity<>(null,headers, status);
+//			return response;
+//		}
+//		
+//	}
+//	
+	
 	@RequestMapping(path = "get-percentage-attendance/{eid}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Double> getAttendancePercentageByEId(@PathVariable(name = "eid") Integer eid) {
-		Double attObj = employeeService.getAttendancePercentageByEId(eid);
+	public ResponseEntity<Map<String, Double>> getAttendancePercentageByEId(@PathVariable(name = "eid") Integer eid) {
+		Map<String, Double> attObj = employeeService.getAttendancePercentageByEId(eid);
 		if(attObj!=null) {
 			HttpStatus status = HttpStatus.OK;
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("message", "Attendance percentage retreived successfully.");
-			ResponseEntity<Double> response = new ResponseEntity<Double>(attObj, headers, status);
+			ResponseEntity<Map<String, Double>> response = new ResponseEntity<Map<String, Double>>(attObj, headers, status);
 			LOG.info(attObj.toString());
 			return response;
 		}
@@ -177,10 +200,9 @@ public class EmployeeController {
 			HttpStatus status = HttpStatus.NOT_FOUND;
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("message", "Employee not found");
-			ResponseEntity<Double> response = new ResponseEntity<>(null,headers, status);
+			ResponseEntity<Map<String, Double>> response = new ResponseEntity<>(null,headers, status);
 			return response;
 		}
 		
 	}
-	
 }

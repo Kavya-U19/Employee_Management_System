@@ -1,7 +1,9 @@
 package com.project.ems.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,16 +71,28 @@ public class EmployeeService {
 		
 	}
 	
-	public Double getAttendancePercentageByEId(Integer eid) {
+//	public Double getAttendancePercentageByEId(Integer eid) {
+//		Optional<Attendance> a = attendanceRepo.findById(eid);
+//		if(a.isPresent()) {
+//			Attendance empAtt = a.get();
+//			double attPerc = empAtt.getDays() * (100/30);
+//			return attPerc;
+//		}
+//		return null;
+//	}
+//	
+	
+	public Map<String, Double> getAttendancePercentageByEId(Integer eid) {
 		Optional<Attendance> a = attendanceRepo.findById(eid);
+		Map<String, Double> data = new HashMap<>();
 		if(a.isPresent()) {
 			Attendance empAtt = a.get();
-			double attPerc = empAtt.getDays() * (100/30);
-			return attPerc;
+			Double attPerc = (double) (empAtt.getDays() * (100/30));
+			data.put("Attendance", attPerc);
+			return data;
 		}
 		return null;
 	}
-	
 	
 	 public boolean updateEmployee(Employee updatedEmployee) {
 	        Optional<Employee> existingEmployee = empRepository.findById(updatedEmployee.getEid());
