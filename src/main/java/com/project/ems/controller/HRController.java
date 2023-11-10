@@ -26,7 +26,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("hr")
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 public class HRController {
 	
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());

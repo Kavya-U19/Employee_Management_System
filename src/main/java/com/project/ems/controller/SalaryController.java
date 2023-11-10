@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("salary")
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 public class SalaryController {
 	
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
