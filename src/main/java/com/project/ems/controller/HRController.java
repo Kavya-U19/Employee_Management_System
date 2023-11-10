@@ -1,6 +1,7 @@
 package com.project.ems.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -206,6 +207,27 @@ public class HRController {
 	    ResponseEntity<HR> response = new ResponseEntity<>(hrObj, headers, status);
 	    return response;
 	}
+	
+//	@RequestMapping(path = "getlogin/{eid}", method = RequestMethod.GET, produces = "application/json")
+//	public ResponseEntity<Map<String, String>> getLoginDetailsByEId(@PathVariable(name = "eid") Integer eid) {
+//		Map<String, String> hrObj = hrService.getLoginDetailsByEId(eid);
+//		if(hrObj!=null) {
+//			HttpStatus status = HttpStatus.OK;
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.add("message", "Login details retreived successfully.");
+//			ResponseEntity<Map<String, String>> response = new ResponseEntity<Map<String, String>>(hrObj, headers, status);
+//			LOG.info(hrObj.toString());
+//			return response;
+//		}
+//		else {
+//			HttpStatus status = HttpStatus.NOT_FOUND;
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.add("message", "Employee not found");
+//			ResponseEntity<Map<String, String>> response = new ResponseEntity<>(null,headers, status);
+//			return response;
+//		}
+//		
+//	}
 
 }
 

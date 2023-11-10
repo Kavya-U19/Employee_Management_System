@@ -38,6 +38,14 @@ public class HR {
 	@Length(min = 4, max = 20, message = "Length should be 4 to 20 characters!")
 	private String lastName;
 	
+	public Integer getHRId() {
+		return HRId;
+	}
+
+	public void setHRId(Integer hRId) {
+		HRId = hRId;
+	}
+
 	@Column(name = "DOB")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private Date DOB;

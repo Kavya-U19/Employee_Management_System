@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,7 +33,6 @@ public class Employee {
 	@Id 
 	@Column(name = "Employee_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @SequenceGenerator(name="Id_Generator",initialValue=101)
 	private Integer eid;
 
 	@Column(name = "First_Name")
@@ -76,7 +76,7 @@ public class Employee {
 	@Column(name = "Salary")
 	private Double salary;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "HRId")
 	private HR HRId;
 	

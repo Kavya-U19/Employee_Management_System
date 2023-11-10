@@ -1,7 +1,9 @@
 package com.project.ems.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,10 @@ public class HRService {
 	Integer paidLeave=20;
 	Integer sickLeave=12;
 	Integer leaveBal=32;
+	
+//    public Object[] getHRIdAndPasswordByEmail(String email) {
+//        return hrRepo.findHRIdAndPasswordByEmail(email);
+//    }
 	
 	public boolean findHRExist(Integer eid,String password) {
 		Optional<HR> h=hrRepo.findById(eid);
@@ -183,6 +189,22 @@ public class HRService {
 		employee.setSalary(totalSalary(e.getEid()));
 		return empRepo.save(employee);
 	}
+	
+//	public Map<String, Object> getLoginDetailsByEId(String eid) {
+//	Object[] h = hrRepo.findHRIdAndPasswordByEmail(eid);
+//	Optional<Employee> e = empRepo.findByHRId(eid);
+//	Map<String, String> data = new HashMap<>();
+//	if(h.isPresent()) {
+//		HR hrData = h.get();
+//		Employee hrInEmp = e.get();
+//		HR eUsername = hrInEmp.getHRId();
+//		HR ePassword = hrData.getPassword();
+//		data.put("Username", eUsername);
+//		data.put("Password", ePassword);
+//		return data;
+//	}
+//	return null;
+//}
 	
 	
 	//WRT. HR
