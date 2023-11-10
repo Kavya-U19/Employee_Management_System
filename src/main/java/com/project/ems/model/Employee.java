@@ -76,7 +76,7 @@ public class Employee {
 	@Column(name = "Salary")
 	private Double salary;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "HRId")
 	private HR HRId;
 	

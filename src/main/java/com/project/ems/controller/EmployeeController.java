@@ -185,7 +185,7 @@ public class EmployeeController {
 //	}
 //	
 	
-	@RequestMapping(path = "get-percentage-attendance/{eid}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@RequestMapping(path = "get-percentage-attendance/{eid}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Map<String, Double>> getAttendancePercentageByEId(@PathVariable(name = "eid") Integer eid) {
 		Map<String, Double> attObj = employeeService.getAttendancePercentageByEId(eid);
 		if(attObj!=null) {
