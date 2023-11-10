@@ -205,4 +205,25 @@ public class EmployeeController {
 		}
 		
 	}
+	
+//	@RequestMapping(path = "getlogin/{eid}", method = RequestMethod.GET, produces = "application/json")
+//	public ResponseEntity<Map<String, String>> getLoginDetailsByEId(@PathVariable(name = "eid") Integer eid) {
+//		Map<String, String> empObj = employeeService.getLoginDetailsByEId(eid);
+//		if(empObj!=null) {
+//			HttpStatus status = HttpStatus.OK;
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.add("message", "Login details retreived successfully.");
+//			ResponseEntity<Map<String, String>> response = new ResponseEntity<Map<String, String>>(empObj, headers, status);
+//			LOG.info(empObj.toString());
+//			return response;
+//		}
+//		else {
+//			HttpStatus status = HttpStatus.NOT_FOUND;
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.add("message", "Employee not found");
+//			ResponseEntity<Map<String, String>> response = new ResponseEntity<>(null,headers, status);
+//			return response;
+//		}
+//		
+//	}
 }

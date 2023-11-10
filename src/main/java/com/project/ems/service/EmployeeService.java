@@ -198,7 +198,20 @@ public class EmployeeService {
 	         
 	    }
 	    
-	   
+//		public Map<String, String> getLoginDetailsByEId(Integer eid) {
+//			Optional<Employee> e = empRepository.findById(eid);
+//			Map<String, String> data = new HashMap<>();
+//			if(e.isPresent()) {
+//				Employee empData = e.get();
+//				String eUsername = Integer.toString(empData.getEid());
+//				String ePassword = empData.getPassword();
+//				data.put("Username", eUsername);
+//				data.put("Password", ePassword);
+//				return data;
+//			}
+//			return null;
+//		}
+	    
 	    
 	    	    
 }
