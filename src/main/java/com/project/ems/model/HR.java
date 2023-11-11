@@ -11,7 +11,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +30,14 @@ public class HR {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer HRId;
 	
+	public Integer getHRId() {
+		return HRId;
+	}
+
+	public void setHRId(Integer hRId) {
+		HRId = hRId;
+	}
+
 	@Column(name = "First_Name")
 	@Length(min = 4, max = 20, message = "Length should be 4 to 20 characters!")
 	private String firstName;
@@ -39,14 +46,6 @@ public class HR {
 	@Length(min = 4, max = 20, message = "Length should be 4 to 20 characters!")
 	private String lastName;
 	
-//	public Integer getHRId() {
-//		return HRId;
-//	}
-//
-//	public void setHRId(Integer hRId) {
-//		HRId = hRId;
-//	}
-
 	@Column(name = "DOB")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private Date DOB;
