@@ -47,8 +47,8 @@ public class HR {
 	private String lastName;
 	
 	@Column(name = "DOB")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-	private Date DOB;
+//	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	private String DOB;
 	
 	@Column(name="Password")
 	private String password;
@@ -72,11 +72,11 @@ public class HR {
 		this.lastName = lastName;
 	}
 
-	public Date getDOB() {
+	public String getDOB() {
 		return DOB;
 	}
 
-	public void setDOB(Date dOB) {
+	public void setDOB(String dOB) {
 		DOB = dOB;
 	}
 

@@ -42,8 +42,8 @@ public class Employee {
 	private String lastName;
 	
 	@Column(name = "DOB")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-	private Date DOB;
+//	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	private String DOB;
 	
 	@Column(name="Password")
 	private String password;
@@ -61,7 +61,7 @@ public class Employee {
 	private String address;
 
 	@Column(name = "Date_Of_Joining")
-	private Date dateOfJoining;
+	private String dateOfJoining;
 	
 	@Column(name = "Department")
 	private String department;
@@ -110,12 +110,12 @@ public class Employee {
 	}
 
 
-	public Date getDOB() {
+	public String getDOB() {
 		return DOB;
 	}
 
 
-	public void setDOB(Date dOB) {
+	public void setDOB(String dOB) {
 		DOB = dOB;
 	}
 
@@ -168,11 +168,11 @@ public class Employee {
 	}
 
 
-	public Date getDateOfJoining() {
+	public String getDateOfJoining() {
 		return dateOfJoining;
 	}
 
-	public void setDateOfJoining(Date dateOfJoining) {
+	public void setDateOfJoining(String dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
 	}
 
@@ -219,8 +219,8 @@ public class Employee {
 	}
 
 	public Employee(@Length(min = 4, max = 20, message = "Length should be 4 to 20 characters!") String firstName,
-			@Length(min = 4, max = 20, message = "Length should be 4 to 20 characters!") String lastName, Date dOB,
-			String password, String email, String sex, String organization, String address, Date dateOfJoining,
+			@Length(min = 4, max = 20, message = "Length should be 4 to 20 characters!") String lastName, String dOB,
+			String password, String email, String sex, String organization, String address, String dateOfJoining,
 			String department, Salary role, Double appraisal, Double salary, HR hRId) {
 		super();
 		this.firstName = firstName;
