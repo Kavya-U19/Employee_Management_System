@@ -42,9 +42,8 @@ public class Employee {
 	private String lastName;
 	
 	@Column(name = "DOB")
-//	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private String DOB;
-	
+
 	@Column(name="Password")
 	private String password;
 	
@@ -76,9 +75,18 @@ public class Employee {
 	@Column(name = "Salary")
 	private Double salary;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name = "HRId")
 	private HR HRId;
+	
+	
+	public String getDOB() {
+		return DOB;
+	}
+
+	public void setDOB(String dOB) {
+		DOB = dOB;
+	}
 	
 	public Integer getEid() {
 		return eid;
@@ -109,15 +117,6 @@ public class Employee {
 		this.lastName = lastName;
 	}
 
-
-	public String getDOB() {
-		return DOB;
-	}
-
-
-	public void setDOB(String dOB) {
-		DOB = dOB;
-	}
 
 	public String getPassword() {
 		return password;
@@ -218,10 +217,9 @@ public class Employee {
 		HRId = hRId;
 	}
 
-	public Employee(@Length(min = 4, max = 20, message = "Length should be 4 to 20 characters!") String firstName,
-			@Length(min = 4, max = 20, message = "Length should be 4 to 20 characters!") String lastName, String dOB,
-			String password, String email, String sex, String organization, String address, String dateOfJoining,
-			String department, Salary role, Double appraisal, Double salary, HR hRId) {
+	public Employee(String firstName, String lastName, String dOB, String password, String email, String sex,
+			String organization, String address, String dateOfJoining, String department, Salary role, Double appraisal,
+			Double salary, HR hRId) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -239,8 +237,4 @@ public class Employee {
 		HRId = hRId;
 	}
 	
-
-	
-	
-
 }
