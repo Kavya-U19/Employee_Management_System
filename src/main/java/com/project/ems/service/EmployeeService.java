@@ -116,7 +116,7 @@ public class EmployeeService {
 	    
 	    
 	    
-	    public Leave applyLeave(Integer empid, String leaveType, Integer numDays, List<Date> leaveDate) {
+	    public Leave applyLeave(Integer empid, String leaveType, Integer numDays, Map<String, String> leaveDate) {
 	        Optional<Leave> employee = leaveRepo.findById(empid);
 
 	        if (employee.isPresent()) {
@@ -131,19 +131,6 @@ public class EmployeeService {
 	        return null;
 	    }
 
-	    
-	    
-	    
-	    
-//	    public List<Employee> getAllEmployees() {
-//	        return empRepository.findAll();
-//	    }
-//
-//		public Employee addEmployee(@Valid Employee employee) {
-//			// TODO Auto-generated method stub
-//			 return empRepository.save(employee);
-//		}
-
 
 		public Employee getEmployeeById(Integer eid) {
 	        Optional<Employee> employee = empRepository.findById(eid);
@@ -156,25 +143,6 @@ public class EmployeeService {
 	        }
 	    }
 	    
-//		public Integer getleavebalancebyempid(Integer eid) {
-//	        Optional<Leave> empLeave=leaveRepo.findById(eid);
-//	        if(empLeave.isPresent()) {
-//	            return empLeave.get().getLeaveBalance();
-//	            //return empLeave.get().getLeaveBalance();)
-//	        }
-//	        return null;
-//	    }
-		
-//		public Integer[] getleavebalancebyempid(Integer eid) {
-//	        Optional<Leave> empLeave=leaveRepo.findById(eid);
-//	        if(empLeave.isPresent()) {
-//	        	Integer[] empLeaveList = {empLeave.get().getPaidLeave(), empLeave.get().getSickLeave(), empLeave.get().getLeaveBalance()};	        	
-//	            return empLeaveList;
-//	            //return empLeave.get().getLeaveBalance();)
-//	        }
-//	        return null;
-//	    }
-//	   ;
 	   
 		public Leave getleavebalancebyempid(Integer eid) {
 	        Optional<Leave> leaves = leaveRepo.findById(eid);
@@ -198,38 +166,9 @@ public class EmployeeService {
 	         
 	    }
 	    
-//		public Map<String, String> getLoginDetailsByEId(Integer eid) {
-//			Optional<Employee> e = empRepository.findById(eid);
-//			Map<String, String> data = new HashMap<>();
-//			if(e.isPresent()) {
-//				Employee empData = e.get();
-//				String eUsername = Integer.toString(empData.getEid());
-//				String ePassword = empData.getPassword();
-//				data.put("Username", eUsername);
-//				data.put("Password", ePassword);
-//				return data;
-//			}
-//			return null;
-//		}
+}	    
 	    
-	    
-	    	    
-}
 
-
-	
-	
-//addleave=choosing date 
-
-
-//addattendance==
-
-
-//getleavebalancebyempid
-//-----
-//getattendancebypercenatagebyempid
-//-----
-//employeeupdatepassword
 
 
 	

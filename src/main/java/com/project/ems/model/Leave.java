@@ -3,6 +3,7 @@ package com.project.ems.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -15,6 +16,8 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "Leave_Table")
@@ -41,8 +44,9 @@ public class Leave {
 	@Column(name = "Sick_Leave")
 	private Integer sickLeave;
 	
+	@JdbcTypeCode(SqlTypes.JSON)
 	@Column(name = "leave_date")
-	private List<Date> leaveDate;//do this getter setter
+	private Map<String, String> leaveDate;//do this getter setter
 	
 	@Column(name = "num_days")
 	private Integer numDays;
@@ -62,12 +66,12 @@ public class Leave {
 	}
 
 
-	public List<Date> getLeaveDate() {
+	public Map<String, String> getLeaveDate() {
 		return leaveDate;
 	}
 
 
-	public void setLeaveDate(List<Date> leaveDate) {
+	public void setLeaveDate(Map<String, String> leaveDate) {
 		this.leaveDate = leaveDate;
 	}
 

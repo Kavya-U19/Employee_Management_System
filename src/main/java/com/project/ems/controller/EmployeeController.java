@@ -82,15 +82,6 @@ public class EmployeeController {
 		return response;
 	}
 	
-//	@RequestMapping(path = "get-all-leaves/{eid}", method = RequestMethod.GET, produces = "application/json")
-//	public ResponseEntity<Integer> getAllEmps(@PathVariable(name = "eid") Integer eid) {
-//		Integer leave = employeeService.getleavebalancebyempid(eid);
-//		HttpStatus status = HttpStatus.OK;
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.add("message", "Leaves found successfully");
-//		ResponseEntity<Integer> response = new ResponseEntity<>(leave,headers,status);
-//		return response;
-//	}
 	
 	@RequestMapping(path = "get-all-leaves/{eid}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Leave> getAllEmps(@PathVariable(name = "eid") Integer eid) {
@@ -163,27 +154,6 @@ public class EmployeeController {
 		
 	}
 	
-//	@RequestMapping(path = "get-percentage-attendance/{eid}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-//	public ResponseEntity<Double> getAttendancePercentageByEId(@PathVariable(name = "eid") Integer eid) {
-//		Double attObj = employeeService.getAttendancePercentageByEId(eid);
-//		if(attObj!=null) {
-//			HttpStatus status = HttpStatus.OK;
-//			HttpHeaders headers = new HttpHeaders();
-//			headers.add("message", "Attendance percentage retreived successfully.");
-//			ResponseEntity<Double> response = new ResponseEntity<Double>(attObj, headers, status);
-//			LOG.info(attObj.toString());
-//			return response;
-//		}
-//		else {
-//			HttpStatus status = HttpStatus.NOT_FOUND;
-//			HttpHeaders headers = new HttpHeaders();
-//			headers.add("message", "Employee not found");
-//			ResponseEntity<Double> response = new ResponseEntity<>(null,headers, status);
-//			return response;
-//		}
-//		
-//	}
-//	
 	
 	@RequestMapping(path = "get-percentage-attendance/{eid}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Map<String, Double>> getAttendancePercentageByEId(@PathVariable(name = "eid") Integer eid) {
@@ -206,24 +176,4 @@ public class EmployeeController {
 		
 	}
 	
-//	@RequestMapping(path = "getlogin/{eid}", method = RequestMethod.GET, produces = "application/json")
-//	public ResponseEntity<Map<String, String>> getLoginDetailsByEId(@PathVariable(name = "eid") Integer eid) {
-//		Map<String, String> empObj = employeeService.getLoginDetailsByEId(eid);
-//		if(empObj!=null) {
-//			HttpStatus status = HttpStatus.OK;
-//			HttpHeaders headers = new HttpHeaders();
-//			headers.add("message", "Login details retreived successfully.");
-//			ResponseEntity<Map<String, String>> response = new ResponseEntity<Map<String, String>>(empObj, headers, status);
-//			LOG.info(empObj.toString());
-//			return response;
-//		}
-//		else {
-//			HttpStatus status = HttpStatus.NOT_FOUND;
-//			HttpHeaders headers = new HttpHeaders();
-//			headers.add("message", "Employee not found");
-//			ResponseEntity<Map<String, String>> response = new ResponseEntity<>(null,headers, status);
-//			return response;
-//		}
-//		
-//	}
 }
